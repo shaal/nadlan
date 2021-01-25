@@ -12,11 +12,12 @@
     "require": {
         "php": ">=7.3",
         "composer/installers": "^1.9",
-        "drupal/core-composer-scaffold": "^8.8.1",
-        "drupal/core-recommended": "^8.8",
+        "drupal/core-composer-scaffold": "^9.1",
+        "drupal/core-recommended": "^9.1",
+        "drupal/gin": "^3.0@alpha",
         "pantheon-systems/drupal-integrations": "^8",
         "pantheon-systems/quicksilver-pushback": "^2",
-        "drush/drush": "^8.4.5",
+        "drush/drush": "^10",
         "cweagans/composer-patches": "^1.7",
         "drush-ops/behat-drush-endpoint": "^9.3"
     },
@@ -79,6 +80,15 @@
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
+        },
+        "patches": {
+            "drupal/core": {
+                "db version": "https://raw.githubusercontent.com/stevector/drupal-9-project/master/patches/issue-2--mariadb-version.patch"
+            }
+        },
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
         },
         "build-env": {
             "install-cms": [
